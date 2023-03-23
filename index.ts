@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express from 'express';
 import { Router } from 'express';
 import { ExpressPostController } from './controllers/postController';
@@ -34,3 +35,6 @@ app.listen(port, () => {
 });
 
 
+=======
+console.log("hello world")
+>>>>>>> 6ef72a21ca1c36b98d6cf2cfee2793ef9949a6d3
