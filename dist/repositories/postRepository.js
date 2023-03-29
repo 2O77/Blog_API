@@ -50,7 +50,7 @@ var MongoPostRepository = /** @class */ (function () {
                         myModel = new postModel_1.Post({
                             content: content,
                             updatedAt: Date.now(),
-                            createdAt: Date.now()
+                            createdAt: Date.now(),
                         });
                         return [4 /*yield*/, myModel.save()];
                     case 1:
@@ -59,7 +59,7 @@ var MongoPostRepository = /** @class */ (function () {
                                 id: post.id,
                                 content: post.content,
                                 createdAt: post.createdAt,
-                                updatedAt: post.updatedAt
+                                updatedAt: post.updatedAt,
                             }];
                 }
             });
@@ -78,7 +78,7 @@ var MongoPostRepository = /** @class */ (function () {
                                 id: post.id,
                                 content: post.content,
                                 createdAt: post.createdAt,
-                                updatedAt: post.updatedAt
+                                updatedAt: post.updatedAt,
                             };
                         });
                         return [2 /*return*/, convertedPosts];
@@ -93,7 +93,7 @@ var MongoPostRepository = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         if (!(0, mongoose_1.isValidObjectId)(id)) {
-                            throw new Error("please return a valid id");
+                            throw new Error('please return a valid id');
                         }
                         return [4 /*yield*/, postModel_1.Post.findByIdAndUpdate({ _id: id }, { content: content, updatedAt: Date.now() })];
                     case 1:
@@ -102,7 +102,7 @@ var MongoPostRepository = /** @class */ (function () {
                                 id: post.id,
                                 content: post.content,
                                 createdAt: post.createdAt,
-                                updatedAt: post.updatedAt
+                                updatedAt: post.updatedAt,
                             }];
                 }
             });
@@ -115,7 +115,7 @@ var MongoPostRepository = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         if (!(0, mongoose_1.isValidObjectId)(id)) {
-                            throw new Error("please return a valid id");
+                            throw new Error('please return a valid id');
                         }
                         return [4 /*yield*/, postModel_1.Post.findByIdAndDelete({ _id: id })];
                     case 1:
@@ -124,7 +124,7 @@ var MongoPostRepository = /** @class */ (function () {
                                 id: post.id,
                                 content: post.content,
                                 createdAt: post.createdAt,
-                                updatedAt: post.updatedAt
+                                updatedAt: post.updatedAt,
                             }];
                 }
             });

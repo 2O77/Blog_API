@@ -98,7 +98,7 @@ var ExpressPostController = /** @class */ (function () {
                         return [4 /*yield*/, this.postService.updatePost(id, content)];
                     case 1:
                         post = _a.sent();
-                        console.log(post);
+                        res.status(200).json(post);
                         return [3 /*break*/, 3];
                     case 2:
                         err_3 = _a.sent();
@@ -124,7 +124,7 @@ var ExpressPostController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         err_4 = _a.sent();
-                        res.status(400).json(err_4);
+                        res.status(400).json(err_4.toString());
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }

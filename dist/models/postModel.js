@@ -33,16 +33,16 @@ var postSchema = new mongoose_1.Schema({
     },
     createdAt: {
         type: Date,
-        required: [true, ""],
+        required: [true, ''],
         trim: true,
-        default: Date
+        default: Date,
     },
     updatedAt: {
         type: Date,
-        required: [true, ""],
+        required: [true, ''],
         default: Date,
         trim: true,
-    }
+    },
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },

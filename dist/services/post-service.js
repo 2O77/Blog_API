@@ -44,10 +44,10 @@ var DefaultPostService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 if (!content) {
-                    throw new Error("please return a content");
+                    throw new Error('please return a content');
                 }
                 if (content.length > 280) {
-                    throw new Error("Post content should not exceed 280 characters");
+                    throw new Error('Post content should not exceed 280 characters');
                 }
                 return [2 /*return*/, this.postRepository.createPost(content)];
             });
@@ -67,7 +67,17 @@ var DefaultPostService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.postRepository.updatePost(id, content)];
+                    case 0:
+                        if (!id) {
+                            throw new Error('Please return an id');
+                        }
+                        if (!content) {
+                            throw new Error('Please return a content');
+                        }
+                        if (content.length > 280) {
+                            throw new Error('Post content should not exceed 280 characters');
+                        }
+                        return [4 /*yield*/, this.postRepository.updatePost(id, content)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -77,7 +87,11 @@ var DefaultPostService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.postRepository.deletePost(id)];
+                    case 0:
+                        if (!id) {
+                            throw new Error('Please return an id');
+                        }
+                        return [4 /*yield*/, this.postRepository.deletePost(id)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
