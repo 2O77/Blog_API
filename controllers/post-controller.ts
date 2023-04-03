@@ -6,9 +6,10 @@ export class ExpressPostController {
 
   async createPost(req: Request, res: Response) {
     try {
+      const token = req.headers.authorization.toString();
       const content = req.body.content;
 
-      const post = await this.postService.createPost(content);
+      const post = await this.postService.createPost(token, content);
 
       res.status(201).json(post);
     } catch (err) {
@@ -25,19 +26,38 @@ export class ExpressPostController {
 
       res.status(201).json(post);
     } catch (err) {
+      console.log(err);
       res
         .status(500)
-        .send('An error occurred while getting all posts. Please try again later.');
+        .send(
+          'An error occurred while getting all posts. Please try again later.'
+        );
+    }
+  }
+
+  async getPostById(req: Request, res: Response) {
+    try {
+      const id = req.query.id.toString();
+
+      const post = await this.postService.getPostById(id);
+
+      res.status(200).json(post);
+    } catch (err) {
+      res
+        .status(500)
+        .send(
+          'An error occurred while getting a post by id. Please try again later.'
+        );
     }
   }
 
   async updatePost(req: Request, res: Response) {
     try {
+      const token = req.headers.authorization.toString();
       const id = req.query.id.toString();
-
       const content = req.body.content;
 
-      const post = await this.postService.updatePost(id, content);
+      const post = await this.postService.updatePost(token, id, content);
 
       res.status(200).json(post);
     } catch (err) {
@@ -47,9 +67,10 @@ export class ExpressPostController {
 
   async deletePost(req: Request, res: Response) {
     try {
+      const token = req.headers.authorization.toString();
       const id = req.query.id.toString();
 
-      const post = await this.postService.deletePost(id);
+      const post = await this.postService.deletePost(token, id);
 
       res.status(200).json({ post: post, message: 'this post is deleted' });
     } catch (err) {

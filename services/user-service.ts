@@ -28,9 +28,23 @@ class DefaultUserService implements UserService {
       throw new Error('Invalid username or password');
     }
 
-    const token = await this.jwtUserAuthenticator.signUser(user);
+    const token = await this.jwtUserAuthenticator.loginUser(user);
 
     return token;
+  }
+
+  async registerUser(username: string, password: string): Promise<User> {
+    if (!username) {
+      throw new Error('please return a username');
+    }
+
+    if (!password) {
+      throw new Error('please return a password');
+    }
+
+    const user = await this.userRepository.registerUser(username, password);
+
+    return user;
   }
 
   // async getAllUsers(limit: number, offset: number): Promise<User[]> {

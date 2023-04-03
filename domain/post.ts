@@ -1,4 +1,5 @@
 interface Post {
+  username: string;
   id: string;
   content: string;
   createdAt: Date;
@@ -6,17 +7,19 @@ interface Post {
 }
 
 interface PostRepository {
-  createPost(content: string): Promise<Post>;
+  createPost(username: string, content: string): Promise<Post>;
   getAllPosts(limit: number, offset: number): Promise<Post[]>;
-  updatePost(id: string, content: string): Promise<Post>;
-  deletePost(id: string): Promise<Post>;
+  getPostById(id: string): Promise<Post>;
+  updatePost(username: string, id: string, content: string): Promise<Post>;
+  deletePost(username: string, id: string): Promise<Post>;
 }
 
 interface PostService {
-  createPost(content: string): Promise<Post>;
+  createPost(token: string, content: string): Promise<Post>;
   getAllPosts(limit: number, offset: number): Promise<Post[]>;
-  updatePost(id: string, content: string): Promise<Post>;
-  deletePost(id: string): Promise<Post>;
+  getPostById(id: string): Promise<Post>;
+  updatePost(token: string, id: string, content: string): Promise<Post>;
+  deletePost(token: string, id: string): Promise<Post>;
 }
 
 export { Post, PostRepository, PostService };

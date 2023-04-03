@@ -37,19 +37,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var DefaultPostService = /** @class */ (function () {
-    function DefaultPostService(postRepository) {
+    function DefaultPostService(postRepository, userAuthenticator) {
         this.postRepository = postRepository;
+        this.userAuthenticator = userAuthenticator;
     }
-    DefaultPostService.prototype.createPost = function (content) {
+    DefaultPostService.prototype.createPost = function (token, content) {
         return __awaiter(this, void 0, void 0, function () {
+            var decodedUser;
             return __generator(this, function (_a) {
-                if (!content) {
-                    throw new Error('please return a content');
+                switch (_a.label) {
+                    case 0:
+                        if (!content) {
+                            throw new Error('please return a content');
+                        }
+                        if (content.length > 280) {
+                            throw new Error('Post content should not exceed 280 characters');
+                        }
+                        if (!token)
+                            throw new Error('Please return a token');
+                        return [4 /*yield*/, this.userAuthenticator.isValidToken(token)];
+                    case 1:
+                        if (!(_a.sent()))
+                            throw new Error('Invalid token');
+                        return [4 /*yield*/, this.userAuthenticator.decodeToken(token)];
+                    case 2:
+                        decodedUser = _a.sent();
+                        return [2 /*return*/, this.postRepository.createPost(decodedUser.username, content)];
                 }
-                if (content.length > 280) {
-                    throw new Error('Post content should not exceed 280 characters');
-                }
-                return [2 /*return*/, this.postRepository.createPost(content)];
             });
         });
     };
@@ -57,16 +71,44 @@ var DefaultPostService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.postRepository.getAllPosts(limit, offset)];
+                    case 0:
+                        if (limit < 0) {
+                            throw new Error('Limit should be greater than 0');
+                        }
+                        if (offset < 0) {
+                            throw new Error('Offset should be greater than 0');
+                        }
+                        if (typeof limit !== 'number') {
+                            throw new Error('Limit should be a number');
+                        }
+                        if (typeof offset !== 'number') {
+                            throw new Error('Offset should be a number');
+                        }
+                        return [4 /*yield*/, this.postRepository.getAllPosts(limit, offset)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    DefaultPostService.prototype.updatePost = function (id, content) {
+    DefaultPostService.prototype.getPostById = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
+                    case 0:
+                        if (!id) {
+                            throw new Error('Please return an id');
+                        }
+                        return [4 /*yield*/, this.postRepository.getPostById(id)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    DefaultPostService.prototype.updatePost = function (token, id, content) {
+        return __awaiter(this, void 0, void 0, function () {
+            var decodedUser, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         if (!id) {
                             throw new Error('Please return an id');
@@ -77,22 +119,53 @@ var DefaultPostService = /** @class */ (function () {
                         if (content.length > 280) {
                             throw new Error('Post content should not exceed 280 characters');
                         }
-                        return [4 /*yield*/, this.postRepository.updatePost(id, content)];
-                    case 1: return [2 /*return*/, _a.sent()];
+                        if (!token)
+                            throw new Error('Please return a token');
+                        return [4 /*yield*/, this.userAuthenticator.isValidToken(token)];
+                    case 1:
+                        if (!(_b.sent()))
+                            throw new Error('Invalid token');
+                        return [4 /*yield*/, this.userAuthenticator.decodeToken(token)];
+                    case 2:
+                        decodedUser = _b.sent();
+                        _a = decodedUser.username;
+                        return [4 /*yield*/, this.postRepository.getPostById(id)];
+                    case 3:
+                        if (_a !==
+                            (_b.sent()).username)
+                            throw new Error('You are not authorized to update this post');
+                        return [4 /*yield*/, this.postRepository.updatePost(decodedUser.username, id, content)];
+                    case 4: return [2 /*return*/, _b.sent()];
                 }
             });
         });
     };
-    DefaultPostService.prototype.deletePost = function (id) {
+    DefaultPostService.prototype.deletePost = function (token, id) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var decodedUser, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         if (!id) {
                             throw new Error('Please return an id');
                         }
-                        return [4 /*yield*/, this.postRepository.deletePost(id)];
-                    case 1: return [2 /*return*/, _a.sent()];
+                        if (!token)
+                            throw new Error('Please return a token');
+                        return [4 /*yield*/, this.userAuthenticator.isValidToken(token)];
+                    case 1:
+                        if (!(_b.sent()))
+                            throw new Error('Invalid token');
+                        return [4 /*yield*/, this.userAuthenticator.decodeToken(token)];
+                    case 2:
+                        decodedUser = _b.sent();
+                        _a = decodedUser.username;
+                        return [4 /*yield*/, this.postRepository.getPostById(id)];
+                    case 3:
+                        if (_a !==
+                            (_b.sent()).username)
+                            throw new Error('You are not authorized to update this post');
+                        return [4 /*yield*/, this.postRepository.deletePost(decodedUser.username, id)];
+                    case 4: return [2 /*return*/, _b.sent()];
                 }
             });
         });

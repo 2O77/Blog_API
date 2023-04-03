@@ -4,30 +4,30 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: [true, 'you have to write something bro'],
-      trim: true
+      required: [true, 'username is required'],
+      unique: [true, 'username already exists'],
     },
     password: {
       type: String,
-      required: [true, 'you have to write something bro'],
-      trim: true
+      required: [true, 'password is required'],
+      trim: true,
     },
     createdAt: {
       type: Date,
       required: [true, ''],
       trim: true,
-      default: Date
+      default: Date,
     },
     updatedAt: {
       type: Date,
       required: [true, ''],
       default: Date,
-      trim: true
-    }
+      trim: true,
+    },
   },
   {
     toJSON: { virtuals: true },
-    toObject: { virtuals: true }
+    toObject: { virtuals: true },
   }
 );
 export const User = mongoose.model('User', userSchema);

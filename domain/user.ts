@@ -11,24 +11,20 @@ interface Token {
 }
 
 interface UserRepository {
-  // registerUser(username: string, password: string): Promise<User>;
+  registerUser(username: string, password: string): Promise<User>;
   loginUser(username: string, password: string): Promise<User>;
-  // getAllUsers(limit: number, offset: number): Promise<User[]>;
-  // updateUser(id: string, username?: string, password?: string): Promise<User>;
-  // deleteUser(id: string): Promise<User>;
   getUserByUsername(username: string): Promise<User>;
 }
 
 interface UserService {
-  // registerUser(username: string, password: string): Promise<User>;
+  registerUser(username: string, password: string): Promise<User>;
   loginUser(username: string, password: string): Promise<Token>;
-  // getAllUsers(limit: number, offset: number): Promise<User[]>;
-  // updateUser(id: string, username?: string, password?: string): Promise<User>;
-  // deleteUser(id: string): Promise<User>;
 }
 
 interface UserAuthenticator {
-  signUser(user: User): Promise<Token>;
+  loginUser(user: User): Promise<Token>;
+  decodeToken(token: string): Promise<User>;
+  isValidToken(token: string): Promise<boolean>;
 }
 
 export { User, Token, UserRepository, UserService, UserAuthenticator };

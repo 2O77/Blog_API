@@ -22,6 +22,17 @@ class MongoUserRepository implements UserRepository {
     };
   }
 
+  async registerUser(username: string, password: string): Promise<User> {
+    const user = await MongoUser.create({ username, password });
+    return {
+      id: user.id,
+      username: user.username,
+      password: user.password,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
+  }
+
   async getUserByUsername(username: string): Promise<User> {
     const user = await MongoUser.findOne({ username });
 

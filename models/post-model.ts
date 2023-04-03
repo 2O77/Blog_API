@@ -2,9 +2,10 @@ import mongoose, { Schema, model } from 'mongoose';
 
 const postSchema = new Schema(
   {
+    username: { type: String, required: [true, 'user is required'] },
     content: {
       type: String,
-      required: [true, 'you have to write something bro'],
+      required: [true, 'content is required'],
       trim: true,
     },
     createdAt: {
@@ -23,6 +24,6 @@ const postSchema = new Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  },
+  }
 );
 export const Post = mongoose.model('Post', postSchema);
