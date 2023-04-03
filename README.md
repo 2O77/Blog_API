@@ -1,13 +1,7 @@
 # blog-api
-a blog api. provides creating, updating and deleting posts as a unique user. 
+This project is a blog API that allows for creating, updating, and deleting posts as a unique user. I built this project to develop my skills in Node.js, TypeScript, Mongoose, and JWT. It was my first time using TypeScript, Mongoose, and JWT, and I also incorporated clean architecture schema into my projects for the first time. Developing my object-oriented programming skills was also a major focus of this project. Writing interfaces and correctly implementing them was initially challenging, but I was able to improve through this project.
 
-i build this project for develop my node.js,typescript,mongoose,jwt skills. i used typescript, mongoose and jwt for the first time on this project. 
-and another dimension for me, i started to use clean architecture schema for my projects with this project. i developed my oop skills. writing
-interfaces and implementing them correctly was a hard topic to understand for me. you can analyze this repo for understand these topics too.
+Each folder in this project corresponds to a specific job, and each file corresponds to a database collection. For example, the post-controller.ts file contains functions and classes (in this project, each file contains only one class or function, but it could be more) that are related to the post collection and HTTP requests. The user-authentication.ts file contains materials related to the user collection and JWT authorizations.
 
-basically every folder refers to a specific job and every file is refers to database collection. for example post-controller.ts file containts
-functions and classes (in this project every file has a 1 file max but that could be much more) that are related with post collection and htttp requests. 
-or user-authentication.ts file contains stuffs that are related with user collection and jwt authorizations. 
+The index.ts file includes everything related to modules, database connections, HTTP routing, and server connections. To use this API, you must write your access token and database path in the .env file, and then the API will work.
 
-index.ts is includes everything that has relationing modules, database connecting, http routing and server connecting. you have to write your access token 
-and database path for your use case on .env file. and api works. 
