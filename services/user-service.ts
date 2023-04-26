@@ -46,30 +46,6 @@ class DefaultUserService implements UserService {
 
     return user;
   }
-
-  // async getAllUsers(limit: number, offset: number): Promise<User[]> {
-  //   return await this.userRepository.getAllUsers(limit, offset);
-  // }
-
-  // async updateUser(id: string, username: string): Promise<User> {
-  //   if (!id) {
-  //     throw new Error('Please return an id');
-  //   }
-
-  //   if (!username) {
-  //     throw new Error('Please return a username');
-  //   }
-
-  //   return await this.userRepository.updateUser(id, username);
-  // }
-
-  // async deleteUser(id: string): Promise<User> {
-  //   if (!id) {
-  //     throw new Error('Please return an id');
-  //   }
-
-  //   return await this.userRepository.deleteUser(id);
-  // }
 }
 
 export default DefaultUserService;

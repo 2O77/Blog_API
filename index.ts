@@ -47,9 +47,9 @@ app.use(router);
 
 router.get('/post', postController.getPostById.bind(postController));
 router.get('/posts', postController.getAllPosts.bind(postController));
-router.post('/posts', postController.createPost.bind(postController));
-router.patch('/posts', postController.updatePost.bind(postController));
-router.delete('/posts', postController.deletePost.bind(postController));
+router.post('/post', postController.createPost.bind(postController));
+router.patch('/post', postController.updatePost.bind(postController));
+router.delete('/post', postController.deletePost.bind(postController));
 
 router.post('/users/login', userController.loginUser.bind(userController));
 router.post(
